@@ -1,0 +1,220 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1">
+      <div class="list-group">
+        <h3>Categories</h3>
+        <form action="/" method="GET" class="">
+          <button type="submit" class="btn btn-default cat {{#equal highlight "all"}}active{{/equal}}" name="submit">All</button>
+        </form>
+        <form action="/tools" method="GET" class="">
+          <button type="submit" class="btn btn-default cat {{#equal highlight "tools"}}active{{/equal}}" name="submit">Tools</button>
+        </form>
+        <form action="/miscellaneous" method="GET" class="">
+          <button type="submit" class="btn btn-default cat {{#equal highlight "misc"}}active{{/equal}}" name="submit">Miscellaneous</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-6 vika">
+      <table class="table table-bordered tableborder">
+        <thead>
+          <tr>
+            <th class="col-md-1">ID#</th>
+            <th class="col-md-1">Title</th>
+            <th class="col-md-5">Description</th>
+            <th class="col-md-1">In stock</th>
+            <th class="col-md-1">Price</th>
+            <th class="col-md-1 laast"></th>
+          <tr>
+        </thead>
+        <tbody>
+          {{#with result}}
+            {{#each this}}
+              {{#if title}}
+                <tr>
+                  <td>{{id}}</td>
+                  <td>{{title}}</td>
+                  <td><i>{{description}}</i></td>
+                  <td>{{stock}}</td>
+                  <td>{{price}}€</td>
+                  <td class="col-md-1 laast"><a href="/add-to-cart/{{id}}" class="btn btn-default addcart flash1 hvr-push"><i class="material-icons">add_shopping_cart</i></a></td>
+                </tr>
+              {{/if}}
+            {{/each}}
+          {{/with}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-5">
+      {{#if user}}
+      <img src="/pictures/minion3.jpg">
+      {{/if}}
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+{{#with user}}
+  {{#equal role "employee"}}
+    <div class="container-fluid">
+      <h3>Administrative tools</h3>
+    </div>
+    <br>
+
+    <div class="container-fluid">
+      <form action="/edit-stock" method="POST">
+        <label>Add / remove from stock</label>
+          <div class="row">
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Item id" name="id"/>
+            </div>
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Amount" name="stock"/>
+            </div>
+            <button type="submit" class="btn btn-default">Add / remove</button>
+          </div>
+      </form>
+    </div>
+  {{/equal}}
+{{/with}}
+
+{{#with user}}
+  {{#equal role "admin"}}
+    <div class="container-fluid">
+      <h3>Administrative tools</h3>
+      <hr class="small-hr">
+    </div>
+    <div class="container-fluid">
+        <h4>Item management</h4>
+        <br>
+    </div>
+    <div class="container-fluid">
+      <form action="/additem" method="POST">
+        <label>Add new item</label>
+          <div class="row">
+            <div class="col-md-1">
+              <select class="form-control" name="category">
+                <option>Tools</option>
+                <option>Miscellaneous</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Title" name="title"/>
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control" placeholder="Description" name="description"/>
+            </div>
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="In stock" name="stock"/>
+            </div>
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Price" name="price"/>
+            </div>
+            <button type="submit" class="btn btn-default">Add item</button>
+          </div>
+      </form>
+    </div>
+    <br>
+
+    <div class="container-fluid">
+      <form action="/edit-stock" method="POST">
+        <label>Add / remove from stock</label>
+          <div class="row">
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Item id" name="id"/>
+            </div>
+            <div class="col-md-1">
+              <input type="number" class="form-control" placeholder="Amount" name="stock"/>
+            </div>
+            <button type="submit" class="btn btn-default">Add / remove</button>
+          </div>
+      </form>
+    </div>
+    <br>
+
+    <div class="container-fluid">
+      <form action="/deleteitem" method="POST">
+        <label>Delete item</label>
+          <div class="row">
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Item id" name="id"/>
+            </div>
+            <button type="submit" class="btn btn-default">Delete item</button>
+          </div>
+      </form>
+      <br>
+      <hr class="small-hr">
+    </div>
+
+    <div class="container-fluid">
+      <h4>User management</h4>
+      <br>
+    </div>
+
+    <div class="container-fluid">
+      <form action="/register" method="POST">
+        <label>Create new user</label>
+          <div class="row">
+            <div class="col-md-1">
+              <select class="form-control" name="role">
+                <option>admin</option>
+                <option>employee</option>
+                <option>customer</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Username" name="username"/>
+            </div>
+            <div class="col-md-2">
+              <input type="password" class="form-control" placeholder="Password" name="password"/>
+            </div>
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Credits" name="credit"/>
+            </div>
+            <button type="submit" class="btn btn-default">Create user</button>
+          </div>
+      </form>
+    </div>
+    <br>
+
+    <div class="container-fluid">
+      <form action="/edit-credits" method="POST">
+        <label>Add / remove users credits</label>
+          <div class="row">
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Username" name="username"/>
+            </div>
+            <div class="col-md-1">
+              <input type="number" class="form-control" placeholder="Amount" name="amount"/>
+            </div>
+            <button type="submit" class="btn btn-default">Add / remove</button>
+          </div>
+      </form>
+    </div>
+    <br>
+
+    <div class="container-fluid">
+      <form action="/deleteuser" method="POST">
+        <label>Delete user</label>
+          <div class="row">
+            <div class="col-md-1">
+              <input type="text" class="form-control" placeholder="Username" name="username"/>
+            </div>
+            <button type="submit" class="btn btn-default">Delete user</button>
+          </div>
+      </form>
+    </div>
+    <br>
+    <hr>
+
+    <div class="container-fluid">
+      <div class="col-md-1 disclaimer">
+        <h4>Disclaimer :</h4>
+        <p>  This is not a real store and this is only for personal use. This will be used to impress my potential future employer.</p>
+      </div>
+    </div>
+  {{/equal}}
+{{/with}}

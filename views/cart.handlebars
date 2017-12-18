@@ -1,0 +1,47 @@
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-4">
+      <table class="table table-bordered tableborder">
+        <thead>
+          <tr>
+            <th class="col-md-1">Item</th>
+            <th class="col-md-1">Price per unit</th>
+            <th class="col-md-1">Quantity</th>
+            <th class="col-md-1">Price</th>
+          <tr>
+        </thead>
+        <tbody>
+          {{#with cart}}
+          {{#each items}}
+            <tr>
+              <td>{{item.0.title}}</td>
+              <td>{{item.0.price}}€</td>
+              <td>{{qty}}</td>
+              <td>{{price}}€</td>
+            </tr>
+          {{/each}}
+        </tbody>
+        <tfoot class="cart-last-line">
+          <tr>
+            <td><b>Total</b></td>
+            <td> - </td>
+            <td><b>{{totalQty}}</b></td>
+            <td><b>{{totalPrice}}€</b></td>
+          </tr>
+          {{/with}}
+        </tfoot>
+      </table>
+      <a href="/buy" class="btn btn-default">Purchase items</a>
+      <a href="/empty-cart" class="btn btn-default cart"><i class="material-icons">remove_shopping_cart</i> Empty cart</a>
+    </div>
+
+    <div class="col-md-5">
+      {{#if user}}
+      <img class="image" src="/pictures/minion6.jpg">
+      {{/if}}
+    </div>
+
+  </div>
+</div>
