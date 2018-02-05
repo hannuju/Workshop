@@ -6,7 +6,7 @@ Webstore hosted on Linux virtual machine.
 - MySQL database  
   - Shell script for automatic database backups
   - Bcrypt for hashing passwords
-  - Some basic SQL-injection precautions
+  - Basic SQL-injection precautions
 - Passport user authentication
 - Handlebars template engine
 
