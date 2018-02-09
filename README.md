@@ -1,5 +1,7 @@
 # Workshop
 
+This is a closed project, but feel free to browse the source.
+
 Webstore hosted on Linux virtual machine.
 
 - NodeJS server with Express framework
